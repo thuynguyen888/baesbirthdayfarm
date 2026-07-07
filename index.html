@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bae's Birthday Farm on Sunshine Island 🐔</title>
+<title>Alles Gute zum Geburtstag! 🐔</title>
 <style>
   :root{
     --grass-dark:#3f7d34;
@@ -262,8 +262,8 @@
 
   <audio id="bgMusic" src="Sounds/background.mp3" loop></audio>
 
-  <div class="banner">🎉 HAPPY BIRTHDAY BAE! 🎉</div>
-  <p class="subtitle">Klick auf ein Huhn auf deiner Sunshine Island! 🐔</p>
+  <div class="banner">🎉 Alles Gute zum Geburtstag! 🎉</div>
+  <p class="subtitle">Klick auf ein Huhn auf der Insel – enthülle, welches Gesicht sich dahinter versteckt 🐔➡️😄</p>
 
   <div class="island-stage" id="islandStage">
     <img class="bg" src="Sunshine Island Set/bfs3.png" alt="Sunshine Island Hintergrund">
@@ -358,6 +358,13 @@
   const doggo = { name:"Hajo", audio:"Sounds/Hajo.ogg", img:"Doggo/Hajo.png", pos:[6,14] };
   const doggoAudio = new Audio(doggo.audio);
 
+  // Nur der Ausschnitt von Sekunde 5 bis 7 soll zu hören sein.
+  doggoAudio.addEventListener("timeupdate", () => {
+    if(doggoAudio.currentTime >= 7){
+      doggoAudio.pause();
+    }
+  });
+
   const doggoPin = document.createElement("button");
   doggoPin.className = "pin doggo";
   doggoPin.style.left = doggo.pos[0] + "%";
@@ -365,7 +372,7 @@
   doggoPin.innerHTML = `<img src="${doggo.img}" alt="${doggo.name}"><span class="name-tag">${doggo.name}</span>`;
   doggoPin.addEventListener("click", () => {
     const startAt = () => {
-      doggoAudio.currentTime = 4; // Sound erst ab Sekunde 4 abspielen
+      doggoAudio.currentTime = 5; // Sound erst ab Sekunde 5 abspielen (endet bei Sekunde 7)
       doggoAudio.play().catch(()=>{ /* Autoplay evtl. blockiert */ });
     };
     if(doggoAudio.readyState >= 1){
